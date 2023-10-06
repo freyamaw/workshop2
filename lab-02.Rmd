@@ -82,6 +82,8 @@ region_count <- plastic_data_all %>%
     count()
 
 region_count
+
+#Africa has the most coastal regions/territories
 ```
 
 
@@ -90,8 +92,12 @@ region_count
 
 ```{r Ex2, message = FALSE}
 # Write your code here to answer exercise 2
-
-
+plastic_data_all %>%
+  mutate(total_mismanage_plastic = mismanaged_plastic * population) %>%
+  group_by(region) %>%
+  summarise(total_mean = mean(total_mismanage_plastic))
+  
+#Africa has highest total, Oceania has lowest.
 
 ```
 
