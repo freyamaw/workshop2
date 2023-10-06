@@ -1,6 +1,6 @@
 ---
 title: "Lab 02 - Global plastic waste"
-author: "Team Name: Ali Al Kenani, Jessie Preston, Wan Sze Mun and User4"
+author: "Team Name: Ali Al Kenani, Jessie Preston, Wan Sze Mun and Freya Maw"
 date: "`r Sys.Date()`"
 output: html_document
 ---
