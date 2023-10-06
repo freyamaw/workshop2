@@ -458,11 +458,88 @@ plastic_data_all %&gt;%
 </div>
 <div id="ex-3." class="section level3">
 <h3>Ex 3.</h3>
-<pre class="r"><code># Write your code here to answer exercise 3</code></pre>
+<pre class="r"><code># Write your code here to answer exercise 3
+
+plastic_data_all %&gt;% 
+  mutate(pct_mismanaged_plastic_ocean = ((mismanaged_plastic_ocean * population) / (mismanaged_plastic * population)) * 100) %&gt;%
+  group_by(region) %&gt;%
+  summarise(median = median(pct_mismanaged_plastic_ocean, na.rm = T))</code></pre>
+<pre><code>## # A tibble: 6 × 2
+##   region                          median
+##   &lt;chr&gt;                            &lt;dbl&gt;
+## 1 Africa                           0.526
+## 2 Asia                             0.974
+## 3 Europe                           0.846
+## 4 Latin America and The Caribbean  3.07 
+## 5 North America                    0.959
+## 6 Oceania                          1.58</code></pre>
 </div>
 <div id="ex-4." class="section level3">
 <h3>Ex 4.</h3>
-<pre class="r"><code># Write your code here to answer exercise 4</code></pre>
+<pre class="r"><code># Write your code here to answer exercise 4
+
+plastic_data_all %&gt;%
+  rename(
+    pop = population,
+    reg = region,
+    mp = mismanaged_plastic,
+    mpo = mismanaged_plastic_ocean
+  )</code></pre>
+<pre><code>## # A tibble: 159 × 6
+##    code  reg                                  pop     mpo name                mp
+##    &lt;chr&gt; &lt;chr&gt;                              &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
+##  1 AGO   Africa                           31808.  0.0270  Angola           7.45 
+##  2 ALB   Europe                            2876.  0.543   Albania         24.2  
+##  3 ARE   Asia                              9176.  0.00143 United Arab Em…  0.526
+##  4 ARG   Latin America and The Caribbean  44583.  0.0924  Argentina       10.4  
+##  5 ATG   Latin America and The Caribbean     91.9 0.0206  Antigua and Ba…  6.46 
+##  6 AUS   Oceania                          25170.  0.00127 Australia        0.209
+##  7 BEL   Europe                           11480.  0.00295 Belgium          0.198
+##  8 BEN   Africa                           12114.  0.139   Benin           11.3  
+##  9 BFA   Africa                           20671.  0       Burkina Faso    15.6  
+## 10 BGD   Asia                            164605.  0.151   Bangladesh       6.27 
+## # ℹ 149 more rows</code></pre>
+<pre class="r"><code>str_replace_all(plastic_data_all$region, &quot;Latin America and The Caribbean&quot;, &quot;LAC&quot; )</code></pre>
+<pre><code>##   [1] &quot;Africa&quot;        &quot;Europe&quot;        &quot;Asia&quot;          &quot;LAC&quot;          
+##   [5] &quot;LAC&quot;           &quot;Oceania&quot;       &quot;Europe&quot;        &quot;Africa&quot;       
+##   [9] &quot;Africa&quot;        &quot;Asia&quot;          &quot;Europe&quot;        &quot;Asia&quot;         
+##  [13] &quot;LAC&quot;           &quot;Europe&quot;        &quot;LAC&quot;           &quot;LAC&quot;          
+##  [17] &quot;LAC&quot;           &quot;Asia&quot;          &quot;North America&quot; &quot;LAC&quot;          
+##  [21] &quot;Asia&quot;          &quot;Africa&quot;        &quot;Africa&quot;        &quot;Africa&quot;       
+##  [25] &quot;Africa&quot;        &quot;LAC&quot;           &quot;Africa&quot;        &quot;Africa&quot;       
+##  [29] &quot;LAC&quot;           &quot;Asia&quot;          &quot;Europe&quot;        &quot;Africa&quot;       
+##  [33] &quot;LAC&quot;           &quot;Europe&quot;        &quot;LAC&quot;           &quot;Africa&quot;       
+##  [37] &quot;LAC&quot;           &quot;Africa&quot;        &quot;Africa&quot;        &quot;Africa&quot;       
+##  [41] &quot;Europe&quot;        &quot;Europe&quot;        &quot;Europe&quot;        &quot;Oceania&quot;      
+##  [45] &quot;Europe&quot;        &quot;Africa&quot;        &quot;Europe&quot;        &quot;Asia&quot;         
+##  [49] &quot;Africa&quot;        &quot;Africa&quot;        &quot;LAC&quot;           &quot;Africa&quot;       
+##  [53] &quot;Africa&quot;        &quot;Africa&quot;        &quot;Europe&quot;        &quot;LAC&quot;          
+##  [57] &quot;LAC&quot;           &quot;LAC&quot;           &quot;LAC&quot;           &quot;Asia&quot;         
+##  [61] &quot;LAC&quot;           &quot;Europe&quot;        &quot;LAC&quot;           &quot;Asia&quot;         
+##  [65] &quot;Asia&quot;          &quot;Europe&quot;        &quot;Asia&quot;          &quot;Asia&quot;         
+##  [69] &quot;Europe&quot;        &quot;Asia&quot;          &quot;Europe&quot;        &quot;LAC&quot;          
+##  [73] &quot;Asia&quot;          &quot;Asia&quot;          &quot;Asia&quot;          &quot;Africa&quot;       
+##  [77] &quot;Asia&quot;          &quot;Oceania&quot;       &quot;LAC&quot;           &quot;Asia&quot;         
+##  [81] &quot;Asia&quot;          &quot;Asia&quot;          &quot;Africa&quot;        &quot;Africa&quot;       
+##  [85] &quot;LAC&quot;           &quot;Asia&quot;          &quot;Africa&quot;        &quot;Europe&quot;       
+##  [89] &quot;Europe&quot;        &quot;Africa&quot;        &quot;Europe&quot;        &quot;Africa&quot;       
+##  [93] &quot;Asia&quot;          &quot;LAC&quot;           &quot;Oceania&quot;       &quot;Europe&quot;       
+##  [97] &quot;Asia&quot;          &quot;Europe&quot;        &quot;Africa&quot;        &quot;Africa&quot;       
+## [101] &quot;LAC&quot;           &quot;Africa&quot;        &quot;Asia&quot;          &quot;Africa&quot;       
+## [105] &quot;Africa&quot;        &quot;LAC&quot;           &quot;Europe&quot;        &quot;Europe&quot;       
+## [109] &quot;Oceania&quot;       &quot;Asia&quot;          &quot;Asia&quot;          &quot;LAC&quot;          
+## [113] &quot;LAC&quot;           &quot;Asia&quot;          &quot;Oceania&quot;       &quot;Oceania&quot;      
+## [117] &quot;Europe&quot;        &quot;LAC&quot;           &quot;Asia&quot;          &quot;Europe&quot;       
+## [121] &quot;Asia&quot;          &quot;Asia&quot;          &quot;Africa&quot;        &quot;Europe&quot;       
+## [125] &quot;Europe&quot;        &quot;Asia&quot;          &quot;Africa&quot;        &quot;Africa&quot;       
+## [129] &quot;Asia&quot;          &quot;Oceania&quot;       &quot;Africa&quot;        &quot;LAC&quot;          
+## [133] &quot;Africa&quot;        &quot;Africa&quot;        &quot;LAC&quot;           &quot;Europe&quot;       
+## [137] &quot;Europe&quot;        &quot;Europe&quot;        &quot;Africa&quot;        &quot;Asia&quot;         
+## [141] &quot;Africa&quot;        &quot;Asia&quot;          &quot;Asia&quot;          &quot;Oceania&quot;      
+## [145] &quot;LAC&quot;           &quot;Africa&quot;        &quot;Asia&quot;          &quot;Asia&quot;         
+## [149] &quot;Africa&quot;        &quot;Europe&quot;        &quot;LAC&quot;           &quot;North America&quot;
+## [153] &quot;LAC&quot;           &quot;LAC&quot;           &quot;Asia&quot;          &quot;Oceania&quot;      
+## [157] &quot;Asia&quot;          &quot;Africa&quot;        &quot;Africa&quot;</code></pre>
 </div>
 </div>
 

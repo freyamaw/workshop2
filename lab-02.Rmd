@@ -110,7 +110,7 @@ plastic_data_all %>%
 plastic_data_all %>% 
   mutate(pct_mismanaged_plastic_ocean = ((mismanaged_plastic_ocean * population) / (mismanaged_plastic * population)) * 100) %>%
   group_by(region) %>%
-  summarise(median = median(pct_mismanaged_plastic_ocean))
+  summarise(median = median(pct_mismanaged_plastic_ocean, na.rm = T))
 
 ```
 
@@ -120,6 +120,14 @@ plastic_data_all %>%
 ```{r Ex4, message = FALSE}
 # Write your code here to answer exercise 4
 
+plastic_data_all %>%
+  rename(
+    pop = population,
+    reg = region,
+    mp = mismanaged_plastic,
+    mpo = mismanaged_plastic_ocean
+  )
 
+str_replace_all(plastic_data_all$region, "Latin America and The Caribbean", "LAC" )
 
 ```
